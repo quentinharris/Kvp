@@ -19,7 +19,7 @@ The Index will start at a value of 0 (VBA Long 0) if the starting point is not s
 
 For a standard Kvp there is no restriction on the type of key and consequently an Item added by .AddByIndex may be followed by AddbyKey with the key being specified as a string.
 
-###AddByIndexAsByte
+### AddByIndexAsBytes
 
 Adds the provided string as a sequence of integer values represented by the Ascii value of each character in the string
 

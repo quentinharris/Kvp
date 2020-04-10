@@ -25,7 +25,7 @@ Set myKvp = New Kvp
 
 ### Testing
 
-The installed library can be tested using RubberDuck unit testing facilities with the file VBA.TestKvp.bas
+The Kvp library can be tested using the KvpTester Word template.  Instructions for using the template are provided in the template.
 
 ### Strongly typed Kvp
 
