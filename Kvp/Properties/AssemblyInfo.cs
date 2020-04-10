@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Kvp")]
+[assembly: AssemblyTitle("VBALibrary")]
 [assembly: AssemblyDescription("Kvp: A flexible Key/Value pair dictionary object for VBA")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Kvp")]
+[assembly: AssemblyProduct("KvpClass")]
 [assembly: AssemblyCopyright("Copyright ©  2020 Steven Laycock")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

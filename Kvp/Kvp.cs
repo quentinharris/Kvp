@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
+using System.Linq;
 
 namespace VBALibrary
 {
@@ -97,6 +97,25 @@ namespace VBALibrary
             }
         }
 
+        //public void AddByIndexFromEnumerable(dynamic ipEnumerable)
+        //{
+        //    if (ipEnumerable is null)
+        //    {
+        //        throw new ArgumentNullException("Kvp:AddByIndexAsChars: The provided Collection was null");
+        //    }
+        //    foreach (dynamic myItem in ipEnumerable)
+        //    {
+        //        if (myItem.GetType().ToString().Contains("Scripting"))
+        //        {
+        //            Host.Add(myItem, ipEnumerable[myItem]);
+        //        }
+        //        else
+        //        {
+        //            Host.Add(GetNextKvpKey(), myItem);
+        //        }
+        //    }
+        //}
+
         public void AddByIndex(dynamic Value)
         {
             Host.Add(GetNextKvpKey(), Value);
@@ -111,7 +130,7 @@ namespace VBALibrary
             }
         }
 
-        public void AddByIndexAsByte(string ipString)
+        public void AddByIndexAsBytes(string ipString)
         {
             if (ipString.Length == 0)
             {

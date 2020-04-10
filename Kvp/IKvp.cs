@@ -63,7 +63,9 @@ namespace VBALibrary
         /// <param name="Value"></param>
         void AddByIndex(dynamic Value);
 
-        void AddByIndexAsByte(string ipString);
+        // void AddByIndexFromEnumerable(dynamic ipEnumerable);
+
+        void AddByIndexAsBytes(string ipString);
 
         /// <summary>
         /// Populates this Kvp using AddByIndex for each character in the string
