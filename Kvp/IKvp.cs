@@ -71,7 +71,7 @@ namespace VBALibrary
         /// Populates this Kvp using AddByIndex for each character in the string
         /// </summary>
         /// <param name="ipString"></param>
-        void AddByIndexAsLetters(string ipString);
+        void AddByIndexAsCharacters(string ipString);
 
         /// <summary>
         /// Pupulates this Kvp using AddByIndex for each substring in ipString delineated by ipSeparator
@@ -287,6 +287,7 @@ namespace VBALibrary
         /// </summary>
         void RemoveAll();
 
+        dynamic SubSetByKeys(dynamic KeyArray);
         /// <summary>
         /// Returns true if the Values in Kvp are unique.
         /// </summary>

@@ -83,6 +83,48 @@ namespace VBALibrary
             _FirstIndex = Index;
         }
 
+
+        public void AddByIndex(dynamic Value)
+        {
+            Host.Add(GetNextKvpKey(), Value);
+        }
+
+
+        public void AddByIndexAsBytes(string ipString)
+        {
+            if (ipString.Length == 0)
+            {
+                throw new ArgumentNullException("Kvp:AddByIndexAsChars: The provided string was empty (Length=0)");
+            }
+            foreach (char myChar in ipString)
+            {
+                Host.Add(GetNextKvpKey(), (byte) myChar);
+            }
+        }
+
+
+        public void AddByIndexAsCharacters(string ipString)
+        {
+            if (ipString.Length == 0)
+            {
+                throw new ArgumentNullException("Kvp:AddByIndexAsChars: The provided string was empty (Length=0)");
+            }
+            foreach (char myChar in ipString)
+            {
+                Host.Add(GetNextKvpKey(), myChar.ToString());
+            }
+        }
+
+
+        public void AddByIndexFromArray(dynamic ipArray)
+        {
+            //dynamic[] myArray = (dynamic)ipArray;
+            foreach (dynamic myItem in ipArray)
+            {
+                Host.Add(GetNextKvpKey(), myItem);
+            }
+        }
+
         // An equivalent Method for Scripting.Dictionaries is not required bewcause
         // we have the AddbyKeyFromArrays Method
         public void AddByIndexFromCollection(dynamic ipCollection)
@@ -94,63 +136,6 @@ namespace VBALibrary
             foreach (dynamic myItem in ipCollection)
             {
                 Host.Add(GetNextKvpKey(), myItem);
-            }
-        }
-
-        //public void AddByIndexFromEnumerable(dynamic ipEnumerable)
-        //{
-        //    if (ipEnumerable is null)
-        //    {
-        //        throw new ArgumentNullException("Kvp:AddByIndexAsChars: The provided Collection was null");
-        //    }
-        //    foreach (dynamic myItem in ipEnumerable)
-        //    {
-        //        if (myItem.GetType().ToString().Contains("Scripting"))
-        //        {
-        //            Host.Add(myItem, ipEnumerable[myItem]);
-        //        }
-        //        else
-        //        {
-        //            Host.Add(GetNextKvpKey(), myItem);
-        //        }
-        //    }
-        //}
-
-        public void AddByIndex(dynamic Value)
-        {
-            Host.Add(GetNextKvpKey(), Value);
-        }
-
-        public void AddByIndexFromArray(dynamic ipArray)
-        {
-            //dynamic[] myArray = (dynamic)ipArray;
-            foreach (dynamic myItem in ipArray)
-            {
-                Host.Add(GetNextKvpKey(), myItem);
-            }
-        }
-
-        public void AddByIndexAsBytes(string ipString)
-        {
-            if (ipString.Length == 0)
-            {
-                throw new ArgumentNullException("Kvp:AddByIndexAsChars: The provided string was empty (Length=0)");
-            }
-            foreach (char myChar in ipString)
-            {
-                Host.Add(GetNextKvpKey(), myChar);
-            }
-        }
-
-        public void AddByIndexAsLetters(string ipString)
-        {
-            if (ipString.Length == 0)
-            {
-                throw new ArgumentNullException("Kvp:AddByIndexAsChars: The provided string was empty (Length=0)");
-            }
-            foreach (char myChar in ipString)
-            {
-                Host.Add(GetNextKvpKey(), myChar.ToString());
             }
         }
 
@@ -474,6 +459,20 @@ namespace VBALibrary
         {
             Host.Clear();
         }
+
+
+        public dynamic SubSetByKeys(dynamic KeyArray)
+        {
+            Kvp MySubSet = new Kvp();
+            foreach (dynamic myItem in KeyArray)
+            {
+                if (Host.HoldsKey(myItem))
+                {
+                    MySubSet.AddByKey(myItem, Host[myItem]);
+                }
+             }
+        }
+
 
         public bool ValuesAreUnique()
         {
