@@ -8,18 +8,18 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 'Option Explicit
-''@IgnoreModule
-''@Folder("Kvp")
-''@Exposed
-''
-''12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789
-''========1=========2=========3=========4=========5=========6=========7=========8=========9=========A=========B=========C
-'' Code line limit should be 120 characters.
-'' Comment line limit should be 80 characters
-''========1=========2=========3=========4=========5=========6=========7=========8=========9=========A=========B=========C
-''Replace KvpWrapper with the Class name
-''Replace KeyType with your actual type. For a non typed Kvp use Variant
-''Replace ValueType with your actual Type. For a non typed Kvp use Variant
+'@IgnoreModule
+'@Folder("Kvp")
+'@Exposed
+'
+'12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789
+'========1=========2=========3=========4=========5=========6=========7=========8=========9=========A=========B=========C
+' Code line limit should be 120 characters.
+' Comment line limit should be 80 characters
+'========1=========2=========3=========4=========5=========6=========7=========8=========9=========A=========B=========C
+'Replace KvpWrapper with the Class name
+'Replace KeyType with your actual type. For a non typed Kvp use Variant
+'Replace ValueType with your actual Type. For a non typed Kvp use Variant
 '
 '
 'Private Const DefaultStringSeparator As String = ","
@@ -32,11 +32,11 @@ Attribute VB_Exposed = False
 '
 'Private s                                       As State
 '
-''========1=========2=========3=========4=========5=========6=========7=========8=========9=========A=========B=========C
-''
-'' Class Admin
-''
-''========1=========2=========3=========4=========5=========6=========7=========8=========9=========A=========B=========C
+'========1=========2=========3=========4=========5=========6=========7=========8=========9=========A=========B=========C
+'
+' Class Admin
+'
+'========1=========2=========3=========4=========5=========6=========7=========8=========9=========A=========B=========C
 'Private Sub Class_Initialize()
 '
 '    Set s.Host = New Kvp
@@ -44,40 +44,39 @@ Attribute VB_Exposed = False
 'End Sub
 '
 '
-''========1=========2=========3=========4=========5=========6=========7=========8=========9=========A=========B=========C
-''
-'' Implementation - stuff with wrinkles
-''
-''========1=========2=========3=========4=========5=========6=========7=========8=========9=========A=========B=========C
+'========1=========2=========3=========4=========5=========6=========7=========8=========9=========A=========B=========C
 '
-''@DefaultMember
-'Public Property Get Item(ByVal key As KeyType) As ValueType
-'    Item = s.Host.GetItem(key)
-'    'Set Item = s.host.GetItem(key)
+' Implementation - stuff with wrinkles
+'
+'========1=========2=========3=========4=========5=========6=========7=========8=========9=========A=========B=========C
+'
+'@DefaultMember
+'Public Property Get Item(ByVal Key As KeyType) As ValueType
+'    Item = s.Host.GetItem(Key)
+'    Set Item = s.Host.GetItem(Key)
 'End Property
 '
-'' Select Let or Set depending on the Value Type
-'Public Property Let Item(ByVal key As KeyType, ByVal Value As ValueType)
-'    s.Host.SetItem key, Value
+' Select Let or Set depending on the Value Type
+'Public Property Let Item(ByVal Key As KeyType, ByVal Value As ValueType)
+'    s.Host.SetItem Key, Value
 'End Property
 '
-''Public Property Set Item(ByVal Key As KeyType, ByVal Value As ValueType)
-''    s.Host.SetItem Key, Value
-''End Property
+'Public Property Set Item(ByVal Key As KeyType, ByVal Value As ValueType)
+'    s.Host.SetItem Key, Value
+'End Property
 '
-''@Enumerator
+'@Enumerator
 'Public Property Get NewEnum() As Variant
-'
-'    ' KvpEnum returns a KVPair but the vagaries of VBA means we have to assign to a Variant
+'     KvpEnum returns a KVPair but the vagaries of VBA means we have to assign to a Variant
 '     Set NewEnum = s.HostKvp.KvpEnum
 '
 'End Property
 '
-''========1=========2=========3=========4=========5=========6=========7=========8=========9=========A=========B=========C
-''
-'' Implementation - just passthoughs
-''
-''========1=========2=========3=========4=========5=========6=========7=========8=========9=========A=========B=========C
+'========1=========2=========3=========4=========5=========6=========7=========8=========9=========A=========B=========C
+'
+' Implementation - just passthoughs
+'
+'========1=========2=========3=========4=========5=========6=========7=========8=========9=========A=========B=========C
 '
 'Public Sub AddbyIndex(ByVal Value As ValueType)
 '    s.Host.AddbyIndex Value
@@ -87,8 +86,8 @@ Attribute VB_Exposed = False
 '    s.Host.AddByIndexAsBytes ValueString
 'End Sub
 '
-'Public Sub AddByIndexAsLetters(ByVal ValueString As String)
-'    s.Host.AddByIndexAsLetters ValueString
+'Public Sub AddByIndexAsCharacters(ByVal ValueString As String)
+'    s.Host.AddByIndexAsCharacters ValueString
 'End Sub
 '
 'Public Sub AddByIndexFromArray(ByVal ValueArray As Variant)
@@ -99,8 +98,8 @@ Attribute VB_Exposed = False
 '    s.Host.AddByIndexFromCollection ValueCollection
 'End Sub
 '
-'Public Sub AddByKey(ByVal key As KeyType, ByVal Value As ValueType)
-'    s.Host.AddByKey key, Value
+'Public Sub AddByKey(ByVal Key As KeyType, ByVal Value As ValueType)
+'    s.Host.AddByKey Key, Value
 'End Sub
 '
 'Public Sub AddbyKeyFromArrays(ByVal KeyArray As Variant, ByVal ValueArray As Variant)
@@ -167,8 +166,8 @@ Attribute VB_Exposed = False
 '    GetValuesAsString = s.Host.GetValuesAsString
 'End Function
 '
-'Public Function HoldsKey(ByVal key As KeyType) As Boolean
-'    HoldsKey = s.Host.HoldsKey
+'Public Function HoldsKey(ByVal Key As KeyType) As Boolean
+'    HoldsKey = s.Host.HoldsKey(Key)
 'End Function
 '
 'Public Function HoldsValue(ByVal Value As ValueType) As Boolean
@@ -187,21 +186,20 @@ Attribute VB_Exposed = False
 '    KeyAt = s.Host.KeyAt(Index)
 'End Function
 '
-'Public Function LacksKey() As Boolean
-'    LackKey = s.Host.LacksKey
+'Public Function LacksKey(ByVal Key As KeyType) As Boolean
+'    LackKey = s.Host.LacksKey(Key)
 'End Function
 '
-'Public Function LacksValue() As Boolean
-'    LacksValue = s.Host.LacksValue
+'Public Function LacksValue(ByVal Value As ValueType) As Boolean
+'    LacksValue = s.Host.LacksValue(Value)
 'End Function
 '
-'Public Function Mirror() As KvpWrapper
-'' may need some jiggery pokery
+'Public Function Mirror() As Kvp
 '    Set Mirror = s.Host.Mirror
 'End Function
 '
-'Public Function Pull(ByVal key As KeyType) As KVPair
-'    Set Pull = s.Host.Pull(key)
+'Public Function Pull(ByVal Key As KeyType) As KVPair
+'    Set Pull = s.Host.Pull(Key)
 'End Function
 '
 'Public Function PullFirst() As KVPair
@@ -212,25 +210,29 @@ Attribute VB_Exposed = False
 '    Set PullLast = s.Host.PullLast
 'End Function
 '
-'Public Sub Remove(ByVal key As KeyType)
-'    s.Host.Remove key
+'Public Sub Remove(ByVal Key As KeyType)
+'    s.Host.Remove Key
 'End Sub
 '
-'Public Sub RemoveFirst(ByVal key As KeyType)
-'    s.Host.RemoveFirst key
+'Public Sub RemoveFirst()
+'    s.Host.RemoveFirst
 'End Sub
 '
-'Public Sub RemoveLast(ByVal key As KeyType)
-'    s.Host.RemoveLast key
+'Public Sub RemoveLast()
+'    s.Host.RemoveLast
 'End Sub
 '
-'Public Sub SetFirstIndexAsLong(ByVal Index As Long)
-'    s.Host.SetFirstIndexAsLong Index
+'Public Sub SetFirstIndexAsLong(ByVal FirstIndex As Long)
+'    s.Host.SetFirstIndexAsLong FirstIndex
 'End Sub
 '
-'Public Sub SetFirstIndexAsString(ByVal Index As String)
-'    s.Host.SetFirstIndexAsString Index
+'Public Sub SetFirstIndexAsString(ByVal FirstIndex As String)
+'    s.Host.SetFirstIndexAsString FirstIndex
 'End Sub
+'
+'Public Function SubSetByKeys(ByVal KeyArray As Variant) As Kvp
+'    Set SubSetByKeys = s.Host.SubSetByKeys(KeyArray)
+'End Function
 '
 'Public Function ValuesAreUnique() As Boolean
 '    ValuesAreUnique = s.Host.ValuesAreUnique

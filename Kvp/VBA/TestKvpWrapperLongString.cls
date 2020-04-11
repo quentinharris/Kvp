@@ -17,7 +17,7 @@ Option Explicit
 ' Code line limit should be 120 characters.
 ' Comment line limit should be 80 characters
 '========1=========2=========3=========4=========5=========6=========7=========8=========9=========A=========B=========C
-'
+''Replace KvpWrapper with the Class name
 'Replace Long with your actual type. For a non typed Kvp use Variant
 'Replace String with your actual Type. For a non typed Kvp use Variant
 
@@ -51,15 +51,15 @@ End Sub
 '========1=========2=========3=========4=========5=========6=========7=========8=========9=========A=========B=========C
 
 '@DefaultMember
-Public Property Get Item(ByRef key As Long) As String
+Public Property Get Item(ByRef Key As Long) As String
 Attribute Item.VB_UserMemId = 0
-    Item = s.Host.GetItem(key)
+    Item = s.Host.GetItem(Key)
     'Set Item = s.Host.GetItem(Key)
 End Property
 
 ' Select Let or Set depending on the Value Type
-Public Property Let Item(ByRef key As Long, ByRef Value As String)
-    s.Host.SetItem key, Value
+Public Property Let Item(ByRef Key As Long, ByRef Value As String)
+    s.Host.SetItem Key, Value
 End Property
 
 'Public Property Set Item(ByRef Key As Long, ByRef Value As String)
@@ -84,12 +84,12 @@ Public Sub AddbyIndex(ByVal Value As String)
     s.Host.AddbyIndex Value
 End Sub
 
-Public Sub AddByIndexAsByte(ByVal ValueString As String)
+Public Sub AddByIndexAsBytes(ByVal ValueString As String)
     s.Host.AddByIndexAsBytes ValueString
 End Sub
 
-Public Sub AddByIndexAsLetters(ByVal ValueString As String)
-    s.Host.AddByIndexAsLetters ValueString
+Public Sub AddByIndexAsCharacters(ByVal ValueString As String)
+    s.Host.AddByIndexAsCharacters ValueString
 End Sub
 
 Public Sub AddByIndexFromArray(ByVal ValueArray As Variant)
@@ -100,8 +100,8 @@ Public Sub AddByIndexFromCollection(ByVal ValueCollection As Collection)
     s.Host.AddByIndexFromCollection ValueCollection
 End Sub
 
-Public Sub AddByKey(ByVal key As Long, ByVal Value As String)
-    s.Host.AddByKey key, Value
+Public Sub AddByKey(ByVal Key As Long, ByVal Value As String)
+    s.Host.AddByKey Key, Value
 End Sub
 
 Public Sub AddbyKeyFromArrays(ByVal KeyArray As Variant, ByVal ValueArray As Variant)
@@ -112,7 +112,7 @@ Public Sub AddByKeyFromTable(ByVal TableArray As Variant, Optional CopyKeys = Fa
     s.Host.AddByKeyFromTable Table:=TableArray, CopyKeys:=CopyKeys, byColumn:=byColumn
 End Sub
 
-Public Function Clone() As KvpWrapper
+Public Function Clone() As TestKvpWrapperLongString
     Set Clone = s.Host.Clone
 End Function
 
@@ -168,8 +168,8 @@ Public Function GetValuesAsString() As String
     GetValuesAsString = s.Host.GetValuesAsString
 End Function
 
-Public Function HoldsKey(ByVal key As Long) As Boolean
-    HoldsKey = s.Host.HoldsKey(key)
+Public Function HoldsKey(ByVal Key As Long) As Boolean
+    HoldsKey = s.Host.HoldsKey(Key)
 End Function
 
 Public Function HoldsValue(ByVal Value As String) As Boolean
@@ -188,8 +188,8 @@ Public Function KeyAt(ByVal Index As Long) As Long
     KeyAt = s.Host.KeyAt(Index)
 End Function
 
-Public Function LacksKey(ByVal key As Long) As Boolean
-    LacksKey = s.Host.LacksKey(key)
+Public Function LacksKey(ByVal Key As Long) As Boolean
+    LacksKey = s.Host.LacksKey(Key)
 End Function
 
 Public Function LacksValue(ByVal Value As String) As Boolean
@@ -197,12 +197,11 @@ Public Function LacksValue(ByVal Value As String) As Boolean
 End Function
 
 Public Function Mirror() As Kvp
-' may need some jiggery pokery
     Set Mirror = s.Host.Mirror
 End Function
 
-Public Function Pull(ByVal key As Long) As KVPair
-    Set Pull = s.Host.Pull(key)
+Public Function Pull(ByVal Key As Long) As KVPair
+    Set Pull = s.Host.Pull(Key)
 End Function
 
 Public Function PullFirst() As KVPair
@@ -213,8 +212,8 @@ Public Function PullLast() As KVPair
     Set PullLast = s.Host.PullLast
 End Function
 
-Public Sub Remove(ByVal key As Long)
-    s.Host.Remove key
+Public Sub Remove(ByVal Key As Long)
+    s.Host.Remove Key
 End Sub
 
 Public Sub RemoveFirst()
@@ -225,13 +224,17 @@ Public Sub RemoveLast()
     s.Host.RemoveLast
 End Sub
 
-Public Sub SetFirstIndexAsLong(ByVal Index As Long)
-    s.Host.SetFirstIndexAsLong Index
+Public Sub SetFirstIndexAsLong(ByVal FirstIndex As Long)
+    s.Host.SetFirstIndexAsLong FirstIndex
 End Sub
 
-Public Sub SetFirstIndexAsString(ByVal Index As String)
-    s.Host.SetFirstIndexAsString Index
+Public Sub SetFirstIndexAsString(ByVal FirstIndex As String)
+    s.Host.SetFirstIndexAsString FirstIndex
 End Sub
+
+Public Function SubSetByKeys(ByVal KeyArray As Variant) As Kvp
+    Set SubSetByKeys = s.Host.SubSetByKeys(KeyArray)
+End Function
 
 Public Function ValuesAreUnique() As Boolean
     ValuesAreUnique = s.Host.ValuesAreUnique
@@ -240,5 +243,3 @@ End Function
 Public Function ValuesAreNotUnique() As Boolean
     ValuesAreNotUnique = s.Host.ValuesAreNotUnique
 End Function
-
-

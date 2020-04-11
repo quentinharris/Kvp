@@ -129,7 +129,7 @@ Private Sub Add_ByIndex_NoStarterIndex()
     Dim myResult As Boolean: myResult = True
     Dim myPair As Variant
     For Each myPair In myKvp
-        myResult = myResult And (CStr(myPair.key + 1) = myPair.Value)
+        myResult = myResult And (CStr(myPair.Key + 1) = myPair.Value)
     Next
     
     Assert.IsTrue myResult
@@ -223,7 +223,7 @@ Private Sub Add_ByIndexAsChars_DefaultStartIndex()
     'Act:
        
     Dim myKvp As TestKvpWrapperLongString: Set myKvp = New TestKvpWrapperLongString
-    myKvp.AddByIndexAsLetters myString
+    myKvp.AddByIndexAsCharacters myString
     myResultArray = myKvp.GetValues
     'Assert:
 
@@ -253,7 +253,7 @@ Private Sub Add_ByIndexAsChars_StartIndexLong_5()
     
     Dim myKvp As TestKvpWrapperLongString: Set myKvp = New TestKvpWrapperLongString
     myKvp.SetFirstIndexAsLong 5&
-    myKvp.AddByIndexAsLetters myString
+    myKvp.AddByIndexAsCharacters myString
     myResultArray = myKvp.GetKeys
     'Assert:
 
@@ -284,7 +284,7 @@ Private Sub Add_ByIndexAsChars_StartIndexString_Helloa()
     
     Dim myKvp As TestKvpWrapperLongString: Set myKvp = New TestKvpWrapperLongString
     myKvp.SetFirstIndexAsString "Helloa"
-    myKvp.AddByIndexAsLetters myString
+    myKvp.AddByIndexAsCharacters myString
     myResultArray = myKvp.GetKeys
     'Assert:
 
@@ -420,11 +420,11 @@ Private Sub Add_ByKey_Long_101()
     
     'Act:
     Set myKvp = New TestKvpWrapperLongString
-    myKvp.AddByKey key:=22&, Value:="Hello World 22"
-    myKvp.AddByKey key:=25&, Value:="Hello World 25"
-    myKvp.AddByKey key:=31&, Value:="Hello World 31"
-    myKvp.AddByKey key:=101&, Value:="Hello World 101"
-    myKvp.AddByKey key:=2500&, Value:="Hello World 2500"
+    myKvp.AddByKey Key:=22&, Value:="Hello World 22"
+    myKvp.AddByKey Key:=25&, Value:="Hello World 25"
+    myKvp.AddByKey Key:=31&, Value:="Hello World 31"
+    myKvp.AddByKey Key:=101&, Value:="Hello World 101"
+    myKvp.AddByKey Key:=2500&, Value:="Hello World 2500"
     'Assert:
     'Debug.Print myKvp.Item(CLng(1))
     Assert.AreEqual "Hello World 101", myKvp.Item(101&)
@@ -444,11 +444,11 @@ Private Sub Add_ByKey_String_Helloc()
     Dim myKvp As TestKvpWrapperStringString: Set myKvp = New TestKvpWrapperStringString
     
     'Act:
-    myKvp.AddByKey key:="Helloa", Value:="Hello World 22"
-    myKvp.AddByKey key:="Hellob", Value:="Hello World 25"
-    myKvp.AddByKey key:="Helloc", Value:="Hello World 31"
-    myKvp.AddByKey key:="Hellod", Value:="Hello World 101"
-    myKvp.AddByKey key:="Helloe", Value:="Hello World 2500"
+    myKvp.AddByKey Key:="Helloa", Value:="Hello World 22"
+    myKvp.AddByKey Key:="Hellob", Value:="Hello World 25"
+    myKvp.AddByKey Key:="Helloc", Value:="Hello World 31"
+    myKvp.AddByKey Key:="Hellod", Value:="Hello World 101"
+    myKvp.AddByKey Key:="Helloe", Value:="Hello World 2500"
     
     'Assert:
     Assert.AreEqual "Hello World 31", myKvp.Item("Helloc")
@@ -675,7 +675,7 @@ Private Sub HoldsKey()
     Dim myKvp As TestKvpWrapperLongString: Set myKvp = New TestKvpWrapperLongString
     
     'Act:
-    myKvp.AddByKey key:=22&, Value:="Hello World"
+    myKvp.AddByKey Key:=22&, Value:="Hello World"
     
     'Assert:
     Assert.AreEqual True, myKvp.HoldsKey(22&)
@@ -694,7 +694,7 @@ Private Sub HoldsValue()
     Dim myKvp As TestKvpWrapperLongString: Set myKvp = New TestKvpWrapperLongString
     
     'Act:
-    myKvp.AddByKey key:=22&, Value:="Hello World"
+    myKvp.AddByKey Key:=22&, Value:="Hello World"
     
     'Assert:
     Assert.AreEqual True, myKvp.HoldsValue("Hello World")
@@ -713,7 +713,7 @@ Private Sub LacksValue()
     Dim myKvp As TestKvpWrapperLongString: Set myKvp = New TestKvpWrapperLongString
     
     'Act:
-    myKvp.AddByKey key:=22&, Value:="Hello World"
+    myKvp.AddByKey Key:=22&, Value:="Hello World"
     
     'Assert:
     Assert.AreEqual True, myKvp.LacksValue(22&)
@@ -732,7 +732,7 @@ Private Sub LacksKey()
     Dim myKvp As TestKvpWrapperLongString: Set myKvp = New TestKvpWrapperLongString
     
     'Act:
-    myKvp.AddByKey key:=22&, Value:="Hello World"
+    myKvp.AddByKey Key:=22&, Value:="Hello World"
     
     'Assert:
     Assert.AreEqual True, myKvp.LacksKey(80&)
@@ -757,9 +757,9 @@ Private Sub GetKey()
 
     'Act:
     Set myKvp = New TestKvpWrapperLongString
-    myKvp.AddByKey key:=22&, Value:="Hello World 1"
-    myKvp.AddByKey key:=23&, Value:="Hello World 2"
-    myKvp.AddByKey key:=25&, Value:="Hello World 3"
+    myKvp.AddByKey Key:=22&, Value:="Hello World 1"
+    myKvp.AddByKey Key:=23&, Value:="Hello World 2"
+    myKvp.AddByKey Key:=25&, Value:="Hello World 3"
     
     myKvp_keys(0) = 22&
     myKvp_keys(1) = 23&
@@ -786,9 +786,9 @@ Private Sub GetKeys()
 
     'Act:
     Set myKvp = New TestKvpWrapperLongString
-    myKvp.AddByKey key:=22&, Value:="Hello World 1"
-    myKvp.AddByKey key:=23&, Value:="Hello World 2"
-    myKvp.AddByKey key:=25&, Value:="Hello World 3"
+    myKvp.AddByKey Key:=22&, Value:="Hello World 1"
+    myKvp.AddByKey Key:=23&, Value:="Hello World 2"
+    myKvp.AddByKey Key:=25&, Value:="Hello World 3"
     
     myKvp_keys(0) = 22&
     myKvp_keys(1) = 23&
@@ -815,9 +815,9 @@ Private Sub GetKeysAsString()
 
     'Act:
     Set myKvp = New TestKvpWrapperLongString
-    myKvp.AddByKey key:=22&, Value:="Hello World 1"
-    myKvp.AddByKey key:=23&, Value:="Hello World 2"
-    myKvp.AddByKey key:=25&, Value:="Hello World 3"
+    myKvp.AddByKey Key:=22&, Value:="Hello World 1"
+    myKvp.AddByKey Key:=23&, Value:="Hello World 2"
+    myKvp.AddByKey Key:=25&, Value:="Hello World 3"
     
     myKvp_keys(0) = 22&
     myKvp_keys(1) = 23&
@@ -844,9 +844,9 @@ Private Sub GetKeysAsStringAscending()
 
     'Act:
     Set myKvp = New TestKvpWrapperLongString
-    myKvp.AddByKey key:=22&, Value:="Hello World 1"
-    myKvp.AddByKey key:=23&, Value:="Hello World 2"
-    myKvp.AddByKey key:=25&, Value:="Hello World 3"
+    myKvp.AddByKey Key:=22&, Value:="Hello World 1"
+    myKvp.AddByKey Key:=23&, Value:="Hello World 2"
+    myKvp.AddByKey Key:=25&, Value:="Hello World 3"
     
     Dim myExpected As Variant
     myExpected = "22,23,25"
@@ -870,9 +870,9 @@ Private Sub GetKeysAsStringDecending()
 
     'Act:
     Set myKvp = New TestKvpWrapperLongString
-    myKvp.AddByKey key:=22&, Value:="Hello World 1"
-    myKvp.AddByKey key:=23&, Value:="Hello World 2"
-    myKvp.AddByKey key:=25&, Value:="Hello World 3"
+    myKvp.AddByKey Key:=22&, Value:="Hello World 1"
+    myKvp.AddByKey Key:=23&, Value:="Hello World 2"
+    myKvp.AddByKey Key:=25&, Value:="Hello World 3"
     
     
     Dim myExpected As Variant
@@ -898,9 +898,9 @@ Private Sub GetKeysAscending()
 
     'Act:
     Set myKvp = New TestKvpWrapperLongString
-    myKvp.AddByKey key:=25&, Value:="Hello World 1"
-    myKvp.AddByKey key:=23&, Value:="Hello World 2"
-    myKvp.AddByKey key:=22&, Value:="Hello World 3"
+    myKvp.AddByKey Key:=25&, Value:="Hello World 1"
+    myKvp.AddByKey Key:=23&, Value:="Hello World 2"
+    myKvp.AddByKey Key:=22&, Value:="Hello World 3"
     
     myKvp_keys = Array(22&, 23&, 25&)
     
@@ -925,9 +925,9 @@ Private Sub GetKeysDescending()
 
     'Act:
     Set myKvp = New TestKvpWrapperLongString
-    myKvp.AddByKey key:=22&, Value:="Hello World 1"
-    myKvp.AddByKey key:=23&, Value:="Hello World 2"
-    myKvp.AddByKey key:=25&, Value:="Hello World 3"
+    myKvp.AddByKey Key:=22&, Value:="Hello World 1"
+    myKvp.AddByKey Key:=23&, Value:="Hello World 2"
+    myKvp.AddByKey Key:=25&, Value:="Hello World 3"
     
     myKvp_keys(0) = 25&
     myKvp_keys(1) = 23&
@@ -949,9 +949,9 @@ Private Sub GetFirst()
     
     'Arrange:
     Dim myKvp As TestKvpWrapperLongString: Set myKvp = New TestKvpWrapperLongString
-    myKvp.AddByKey key:=23&, Value:="Hello World 1"
-    myKvp.AddByKey key:=25&, Value:="Hello World 2"
-    myKvp.AddByKey key:=22&, Value:="Hello World 3"
+    myKvp.AddByKey Key:=23&, Value:="Hello World 1"
+    myKvp.AddByKey Key:=25&, Value:="Hello World 2"
+    myKvp.AddByKey Key:=22&, Value:="Hello World 3"
     
     Dim myResult As Variant
     'Act:
@@ -961,7 +961,7 @@ Private Sub GetFirst()
     Set myResult = myKvp.GetFirst
     
     'Assert:
-    Assert.AreEqual CVar(23&), myResult.key
+    Assert.AreEqual CVar(23&), myResult.Key
     
 TestExit:
     Exit Sub
@@ -976,16 +976,16 @@ Private Sub GetLast()
     
     'Arrange:
     Dim myKvp As TestKvpWrapperLongString: Set myKvp = New TestKvpWrapperLongString
-    myKvp.AddByKey key:=23&, Value:="Hello World 1"
-    myKvp.AddByKey key:=25&, Value:="Hello World 2"
-    myKvp.AddByKey key:=22&, Value:="Hello World 3"
+    myKvp.AddByKey Key:=23&, Value:="Hello World 1"
+    myKvp.AddByKey Key:=25&, Value:="Hello World 2"
+    myKvp.AddByKey Key:=22&, Value:="Hello World 3"
     Dim myResult As Variant
     
     'Act:
     Set myResult = myKvp.GetLast
     
     'Assert:
-    Assert.AreEqual CVar(22&), myResult.key
+    Assert.AreEqual CVar(22&), myResult.Key
     
 TestExit:
     Exit Sub
@@ -1004,9 +1004,9 @@ Private Sub GetValues()
     Dim myKvp_items()                       As Variant
     'Act:
     Set myKvp = New TestKvpWrapperLongString
-    myKvp.AddByKey key:=22&, Value:="Hello World 1"
-    myKvp.AddByKey key:=23&, Value:="Hello World 2"
-    myKvp.AddByKey key:=25&, Value:="Hello World 3"
+    myKvp.AddByKey Key:=22&, Value:="Hello World 1"
+    myKvp.AddByKey Key:=23&, Value:="Hello World 2"
+    myKvp.AddByKey Key:=25&, Value:="Hello World 3"
     
     myitems(0) = "Hello World 1"
     myitems(1) = "Hello World 2"
@@ -1027,9 +1027,9 @@ Private Sub GetValuesAsString()
     
     'Arrange:
     Dim myKvp As TestKvpWrapperLongString: Set myKvp = New TestKvpWrapperLongString
-    myKvp.AddByKey key:=22&, Value:="Hello World 1"
-    myKvp.AddByKey key:=23&, Value:="Hello World 2"
-    myKvp.AddByKey key:=25&, Value:="Hello World 3"
+    myKvp.AddByKey Key:=22&, Value:="Hello World 1"
+    myKvp.AddByKey Key:=23&, Value:="Hello World 2"
+    myKvp.AddByKey Key:=25&, Value:="Hello World 3"
     
     Dim myExpected As Variant
     myExpected = "Hello World 1,Hello World 2,Hello World 3"
@@ -1053,9 +1053,9 @@ Private Sub KeyAt()
     
     'Arrange:
     Dim myKvp As TestKvpWrapperLongString: Set myKvp = New TestKvpWrapperLongString
-    myKvp.AddByKey key:=23&, Value:="Hello World 1"
-    myKvp.AddByKey key:=25&, Value:="Hello World 2"
-    myKvp.AddByKey key:=22&, Value:="Hello World 3"
+    myKvp.AddByKey Key:=23&, Value:="Hello World 1"
+    myKvp.AddByKey Key:=25&, Value:="Hello World 2"
+    myKvp.AddByKey Key:=22&, Value:="Hello World 3"
     Dim myResult As Variant
     
     'Act:
@@ -1077,20 +1077,20 @@ Private Sub Cohorts_AllAandBOnly()
     
     'Arrange:
     Dim myKvp1 As TestKvpWrapperLongString: Set myKvp1 = New TestKvpWrapperLongString
-    myKvp1.AddByKey key:=1&, Value:="Hello World 1"
-    myKvp1.AddByKey key:=2&, Value:="Hello World 2"
-    myKvp1.AddByKey key:=3&, Value:="Hello World 3a"
-    myKvp1.AddByKey key:=4&, Value:="Hello World 4"
-    myKvp1.AddByKey key:=5&, Value:="Hello World 5"
-    myKvp1.AddByKey key:=6&, Value:="Hello World 6"
+    myKvp1.AddByKey Key:=1&, Value:="Hello World 1"
+    myKvp1.AddByKey Key:=2&, Value:="Hello World 2"
+    myKvp1.AddByKey Key:=3&, Value:="Hello World 3a"
+    myKvp1.AddByKey Key:=4&, Value:="Hello World 4"
+    myKvp1.AddByKey Key:=5&, Value:="Hello World 5"
+    myKvp1.AddByKey Key:=6&, Value:="Hello World 6"
     
     Dim myKvp2 As Kvp: Set myKvp2 = New Kvp
-    myKvp2.AddByKey key:=1&, Value:="Hello World 1"
-    myKvp2.AddByKey key:=2&, Value:="Hello World 2"
-    myKvp2.AddByKey key:=3&, Value:="Hello World 3b"
-    myKvp2.AddByKey key:=6&, Value:="Hello World 6"
-    myKvp2.AddByKey key:=7&, Value:="Hello World 7"
-    myKvp2.AddByKey key:=8&, Value:="Hello World 8"
+    myKvp2.AddByKey Key:=1&, Value:="Hello World 1"
+    myKvp2.AddByKey Key:=2&, Value:="Hello World 2"
+    myKvp2.AddByKey Key:=3&, Value:="Hello World 3b"
+    myKvp2.AddByKey Key:=6&, Value:="Hello World 6"
+    myKvp2.AddByKey Key:=7&, Value:="Hello World 7"
+    myKvp2.AddByKey Key:=8&, Value:="Hello World 8"
     
     ' Cohort All Unique Keys: All keys in myKvp1 and keys in myKvp2 which are not in myKvp1
     Dim myResult_Keys  As Variant
@@ -1128,20 +1128,20 @@ Private Sub Cohorts_AandBDifferentValues()
     
     'Arrange:
     Dim myKvp1 As TestKvpWrapperLongString: Set myKvp1 = New TestKvpWrapperLongString
-    myKvp1.AddByKey key:=1&, Value:="Hello World 1"
-    myKvp1.AddByKey key:=2&, Value:="Hello World 2"
-    myKvp1.AddByKey key:=3&, Value:="Hello World 3a"
-    myKvp1.AddByKey key:=4&, Value:="Hello World 4"
-    myKvp1.AddByKey key:=5&, Value:="Hello World 5"
-    myKvp1.AddByKey key:=6&, Value:="Hello World 6"
+    myKvp1.AddByKey Key:=1&, Value:="Hello World 1"
+    myKvp1.AddByKey Key:=2&, Value:="Hello World 2"
+    myKvp1.AddByKey Key:=3&, Value:="Hello World 3a"
+    myKvp1.AddByKey Key:=4&, Value:="Hello World 4"
+    myKvp1.AddByKey Key:=5&, Value:="Hello World 5"
+    myKvp1.AddByKey Key:=6&, Value:="Hello World 6"
     
     Dim myKvp2 As Kvp: Set myKvp2 = New Kvp
-    myKvp2.AddByKey key:=1&, Value:="Hello World 1"
-    myKvp2.AddByKey key:=2&, Value:="Hello World 2"
-    myKvp2.AddByKey key:=3&, Value:="Hello World 3b"
-    myKvp2.AddByKey key:=6&, Value:="Hello World 6"
-    myKvp2.AddByKey key:=7&, Value:="Hello World 7"
-    myKvp2.AddByKey key:=8&, Value:="Hello World 8"
+    myKvp2.AddByKey Key:=1&, Value:="Hello World 1"
+    myKvp2.AddByKey Key:=2&, Value:="Hello World 2"
+    myKvp2.AddByKey Key:=3&, Value:="Hello World 3b"
+    myKvp2.AddByKey Key:=6&, Value:="Hello World 6"
+    myKvp2.AddByKey Key:=7&, Value:="Hello World 7"
+    myKvp2.AddByKey Key:=8&, Value:="Hello World 8"
     
     ' Cohort All Unique Keys: All keys in myKvp1 and keys in myKvp2 which are not in myKvp1
     Dim myResult_Keys  As Variant
@@ -1187,20 +1187,20 @@ Private Sub Cohorts_InAorInB()
     Dim myCohortKeys()                        As Variant
     'Act:
     Set myKvp1 = New TestKvpWrapperLongString
-    myKvp1.AddByKey key:=1&, Value:="Hello World 1"
-    myKvp1.AddByKey key:=2&, Value:="Hello World 2"
-    myKvp1.AddByKey key:=3&, Value:="Hello World 3a"
-    myKvp1.AddByKey key:=4&, Value:="Hello World 4"
-    myKvp1.AddByKey key:=5&, Value:="Hello World 5"
-    myKvp1.AddByKey key:=6&, Value:="Hello World 6"
+    myKvp1.AddByKey Key:=1&, Value:="Hello World 1"
+    myKvp1.AddByKey Key:=2&, Value:="Hello World 2"
+    myKvp1.AddByKey Key:=3&, Value:="Hello World 3a"
+    myKvp1.AddByKey Key:=4&, Value:="Hello World 4"
+    myKvp1.AddByKey Key:=5&, Value:="Hello World 5"
+    myKvp1.AddByKey Key:=6&, Value:="Hello World 6"
     
     Dim myKvp2 As Kvp: Set myKvp2 = New Kvp
-    myKvp2.AddByKey key:=1&, Value:="Hello World 1"
-    myKvp2.AddByKey key:=2&, Value:="Hello World 2"
-    myKvp2.AddByKey key:=3&, Value:="Hello World 3b"
-    myKvp2.AddByKey key:=6&, Value:="Hello World 6"
-    myKvp2.AddByKey key:=7&, Value:="Hello World 7"
-    myKvp2.AddByKey key:=8&, Value:="Hello World 8"
+    myKvp2.AddByKey Key:=1&, Value:="Hello World 1"
+    myKvp2.AddByKey Key:=2&, Value:="Hello World 2"
+    myKvp2.AddByKey Key:=3&, Value:="Hello World 3b"
+    myKvp2.AddByKey Key:=6&, Value:="Hello World 6"
+    myKvp2.AddByKey Key:=7&, Value:="Hello World 7"
+    myKvp2.AddByKey Key:=8&, Value:="Hello World 8"
     
     myResult_Keys(0) = 4&
     myResult_Keys(1) = 5&
@@ -1232,20 +1232,20 @@ Private Sub Cohorts__AandBSameValue()
     Dim myCohortKeys()                        As Variant
     'Act:
     Set myKvp1 = New TestKvpWrapperLongString
-    myKvp1.AddByKey key:=1&, Value:="Hello World 1"
-    myKvp1.AddByKey key:=2&, Value:="Hello World 2"
-    myKvp1.AddByKey key:=3&, Value:="Hello World 3a"
-    myKvp1.AddByKey key:=4&, Value:="Hello World 4"
-    myKvp1.AddByKey key:=5&, Value:="Hello World 5"
-    myKvp1.AddByKey key:=6&, Value:="Hello World 6"
+    myKvp1.AddByKey Key:=1&, Value:="Hello World 1"
+    myKvp1.AddByKey Key:=2&, Value:="Hello World 2"
+    myKvp1.AddByKey Key:=3&, Value:="Hello World 3a"
+    myKvp1.AddByKey Key:=4&, Value:="Hello World 4"
+    myKvp1.AddByKey Key:=5&, Value:="Hello World 5"
+    myKvp1.AddByKey Key:=6&, Value:="Hello World 6"
     
     Dim myKvp2 As Kvp: Set myKvp2 = New Kvp
-    myKvp2.AddByKey key:=1&, Value:="Hello World 1"
-    myKvp2.AddByKey key:=2&, Value:="Hello World 2"
-    myKvp2.AddByKey key:=3&, Value:="Hello World 3b"
-    myKvp2.AddByKey key:=6&, Value:="Hello World 6"
-    myKvp2.AddByKey key:=7&, Value:="Hello World 7"
-    myKvp2.AddByKey key:=8&, Value:="Hello World 8"
+    myKvp2.AddByKey Key:=1&, Value:="Hello World 1"
+    myKvp2.AddByKey Key:=2&, Value:="Hello World 2"
+    myKvp2.AddByKey Key:=3&, Value:="Hello World 3b"
+    myKvp2.AddByKey Key:=6&, Value:="Hello World 6"
+    myKvp2.AddByKey Key:=7&, Value:="Hello World 7"
+    myKvp2.AddByKey Key:=8&, Value:="Hello World 8"
     
     myResult_Keys(0) = 1&
     myResult_Keys(1) = 2&
@@ -1278,20 +1278,20 @@ Private Sub Cohorts__Aonly()
     Dim myCohortKeys()                          As Variant
     'Act:
     Set myKvp1 = New TestKvpWrapperLongString
-    myKvp1.AddByKey key:=1&, Value:="Hello World 1"
-    myKvp1.AddByKey key:=2&, Value:="Hello World 2"
-    myKvp1.AddByKey key:=3&, Value:="Hello World 3a"
-    myKvp1.AddByKey key:=4&, Value:="Hello World 4"
-    myKvp1.AddByKey key:=5&, Value:="Hello World 5"
-    myKvp1.AddByKey key:=6&, Value:="Hello World 6"
+    myKvp1.AddByKey Key:=1&, Value:="Hello World 1"
+    myKvp1.AddByKey Key:=2&, Value:="Hello World 2"
+    myKvp1.AddByKey Key:=3&, Value:="Hello World 3a"
+    myKvp1.AddByKey Key:=4&, Value:="Hello World 4"
+    myKvp1.AddByKey Key:=5&, Value:="Hello World 5"
+    myKvp1.AddByKey Key:=6&, Value:="Hello World 6"
     
     Dim myKvp2 As Kvp: Set myKvp2 = New Kvp
-    myKvp2.AddByKey key:=1&, Value:="Hello World 1"
-    myKvp2.AddByKey key:=2&, Value:="Hello World 2"
-    myKvp2.AddByKey key:=3&, Value:="Hello World 3b"
-    myKvp2.AddByKey key:=6&, Value:="Hello World 6"
-    myKvp2.AddByKey key:=7&, Value:="Hello World 7"
-    myKvp2.AddByKey key:=8&, Value:="Hello World 8"
+    myKvp2.AddByKey Key:=1&, Value:="Hello World 1"
+    myKvp2.AddByKey Key:=2&, Value:="Hello World 2"
+    myKvp2.AddByKey Key:=3&, Value:="Hello World 3b"
+    myKvp2.AddByKey Key:=6&, Value:="Hello World 6"
+    myKvp2.AddByKey Key:=7&, Value:="Hello World 7"
+    myKvp2.AddByKey Key:=8&, Value:="Hello World 8"
     
     myResult_Keys(0) = 4&
     myResult_Keys(1) = 5&
@@ -1321,20 +1321,20 @@ Private Sub Cohorts_Bonly()
     Dim myCohortKeys()                        As Variant
     'Act:
     Set myKvp1 = New TestKvpWrapperLongString
-    myKvp1.AddByKey key:=1&, Value:="Hello World 1"
-    myKvp1.AddByKey key:=2&, Value:="Hello World 2"
-    myKvp1.AddByKey key:=3&, Value:="Hello World 3a"
-    myKvp1.AddByKey key:=4&, Value:="Hello World 4"
-    myKvp1.AddByKey key:=5&, Value:="Hello World 5"
-    myKvp1.AddByKey key:=6&, Value:="Hello World 6"
+    myKvp1.AddByKey Key:=1&, Value:="Hello World 1"
+    myKvp1.AddByKey Key:=2&, Value:="Hello World 2"
+    myKvp1.AddByKey Key:=3&, Value:="Hello World 3a"
+    myKvp1.AddByKey Key:=4&, Value:="Hello World 4"
+    myKvp1.AddByKey Key:=5&, Value:="Hello World 5"
+    myKvp1.AddByKey Key:=6&, Value:="Hello World 6"
     
     Dim myKvp2 As Kvp: Set myKvp2 = New Kvp
-    myKvp2.AddByKey key:=1&, Value:="Hello World 1"
-    myKvp2.AddByKey key:=2&, Value:="Hello World 2"
-    myKvp2.AddByKey key:=3&, Value:="Hello World 3b"
-    myKvp2.AddByKey key:=6&, Value:="Hello World 6"
-    myKvp2.AddByKey key:=7&, Value:="Hello World 7"
-    myKvp2.AddByKey key:=8&, Value:="Hello World 8"
+    myKvp2.AddByKey Key:=1&, Value:="Hello World 1"
+    myKvp2.AddByKey Key:=2&, Value:="Hello World 2"
+    myKvp2.AddByKey Key:=3&, Value:="Hello World 3b"
+    myKvp2.AddByKey Key:=6&, Value:="Hello World 6"
+    myKvp2.AddByKey Key:=7&, Value:="Hello World 7"
+    myKvp2.AddByKey Key:=8&, Value:="Hello World 8"
     
     myResult_Keys(0) = 7&
     myResult_Keys(1) = 8&
@@ -1362,11 +1362,11 @@ Private Sub Mirror()
     Dim myKvp2                                     As Kvp
     'Act:
     Set myKvp1 = New TestKvpWrapperLongString
-    myKvp1.AddByKey key:=22&, Value:="Hello World 1"
-    myKvp1.AddByKey key:=23&, Value:="Hello World 2"
-    myKvp1.AddByKey key:=25&, Value:="Hello World 3"
-    myKvp1.AddByKey key:=26&, Value:="Hello World 4"
-    myKvp1.AddByKey key:=27&, Value:="Hello World 5"
+    myKvp1.AddByKey Key:=22&, Value:="Hello World 1"
+    myKvp1.AddByKey Key:=23&, Value:="Hello World 2"
+    myKvp1.AddByKey Key:=25&, Value:="Hello World 3"
+    myKvp1.AddByKey Key:=26&, Value:="Hello World 4"
+    myKvp1.AddByKey Key:=27&, Value:="Hello World 5"
     
     Set myKvp2 = myKvp1.Mirror
     
@@ -1388,11 +1388,11 @@ Private Sub ItemsAreUnique()
     
     'Act:
     Set myKvp1 = New TestKvpWrapperLongString
-    myKvp1.AddByKey key:=22&, Value:="Hello World 1"
-    myKvp1.AddByKey key:=23&, Value:="Hello World 2"
-    myKvp1.AddByKey key:=25&, Value:="Hello World 3"
-    myKvp1.AddByKey key:=26&, Value:="Hello World 4"
-    myKvp1.AddByKey key:=27&, Value:="Hello World 5"
+    myKvp1.AddByKey Key:=22&, Value:="Hello World 1"
+    myKvp1.AddByKey Key:=23&, Value:="Hello World 2"
+    myKvp1.AddByKey Key:=25&, Value:="Hello World 3"
+    myKvp1.AddByKey Key:=26&, Value:="Hello World 4"
+    myKvp1.AddByKey Key:=27&, Value:="Hello World 5"
     
     
     
@@ -1414,18 +1414,18 @@ Private Sub PullFirst()
     
     'Act:
     Set myKvp1 = New TestKvpWrapperLongString
-    myKvp1.AddByKey key:=22&, Value:="Hello World 1"
-    myKvp1.AddByKey key:=23&, Value:="Hello World 2"
-    myKvp1.AddByKey key:=25&, Value:="Hello World 3"
-    myKvp1.AddByKey key:=26&, Value:="Hello World 4"
-    myKvp1.AddByKey key:=27&, Value:="Hello World 5"
+    myKvp1.AddByKey Key:=22&, Value:="Hello World 1"
+    myKvp1.AddByKey Key:=23&, Value:="Hello World 2"
+    myKvp1.AddByKey Key:=25&, Value:="Hello World 3"
+    myKvp1.AddByKey Key:=26&, Value:="Hello World 4"
+    myKvp1.AddByKey Key:=27&, Value:="Hello World 5"
     
     Dim myResult As Variant
     Set myResult = myKvp1.PullFirst
     
     
     'Assert:
-    Assert.IsTrue myKvp1.LacksKey(22&) And (myResult.Value = "Hello World 1") And (myResult.key = 22&)
+    Assert.IsTrue myKvp1.LacksKey(22&) And (myResult.Value = "Hello World 1") And (myResult.Key = 22&)
 
 TestExit:
     Exit Sub
@@ -1442,18 +1442,18 @@ Private Sub PullLast()
     
     'Act:
     Set myKvp1 = New TestKvpWrapperLongString
-    myKvp1.AddByKey key:=22&, Value:="Hello World 1"
-    myKvp1.AddByKey key:=23&, Value:="Hello World 2"
-    myKvp1.AddByKey key:=25&, Value:="Hello World 3"
-    myKvp1.AddByKey key:=26&, Value:="Hello World 4"
-    myKvp1.AddByKey key:=27&, Value:="Hello World 5"
+    myKvp1.AddByKey Key:=22&, Value:="Hello World 1"
+    myKvp1.AddByKey Key:=23&, Value:="Hello World 2"
+    myKvp1.AddByKey Key:=25&, Value:="Hello World 3"
+    myKvp1.AddByKey Key:=26&, Value:="Hello World 4"
+    myKvp1.AddByKey Key:=27&, Value:="Hello World 5"
     
     Dim myResult As Variant
     Set myResult = myKvp1.PullLast
     
     
     'Assert:
-    Assert.IsTrue myKvp1.LacksKey(27&) And (myResult.key = 27&) And (myResult.Value = "Hello World 5")
+    Assert.IsTrue myKvp1.LacksKey(27&) And (myResult.Key = 27&) And (myResult.Value = "Hello World 5")
 
 TestExit:
     Exit Sub
@@ -1469,11 +1469,11 @@ Private Sub PullAny()
     'Arrange:
     
     Dim myKvp1 As TestKvpWrapperLongString: Set myKvp1 = New TestKvpWrapperLongString
-    myKvp1.AddByKey key:=22&, Value:="Hello World 1"
-    myKvp1.AddByKey key:=23&, Value:="Hello World 2"
-    myKvp1.AddByKey key:=25&, Value:="Hello World 3"
-    myKvp1.AddByKey key:=26&, Value:="Hello World 4"
-    myKvp1.AddByKey key:=27&, Value:="Hello World 5"
+    myKvp1.AddByKey Key:=22&, Value:="Hello World 1"
+    myKvp1.AddByKey Key:=23&, Value:="Hello World 2"
+    myKvp1.AddByKey Key:=25&, Value:="Hello World 3"
+    myKvp1.AddByKey Key:=26&, Value:="Hello World 4"
+    myKvp1.AddByKey Key:=27&, Value:="Hello World 5"
     
     'Act:
     
@@ -1499,11 +1499,11 @@ Private Sub RemoveFirst()
     
     'Act:
     Set myKvp1 = New TestKvpWrapperLongString
-    myKvp1.AddByKey key:=22&, Value:="Hello World 1"
-    myKvp1.AddByKey key:=23&, Value:="Hello World 2"
-    myKvp1.AddByKey key:=25&, Value:="Hello World 3"
-    myKvp1.AddByKey key:=26&, Value:="Hello World 4"
-    myKvp1.AddByKey key:=27&, Value:="Hello World 5"
+    myKvp1.AddByKey Key:=22&, Value:="Hello World 1"
+    myKvp1.AddByKey Key:=23&, Value:="Hello World 2"
+    myKvp1.AddByKey Key:=25&, Value:="Hello World 3"
+    myKvp1.AddByKey Key:=26&, Value:="Hello World 4"
+    myKvp1.AddByKey Key:=27&, Value:="Hello World 5"
     
     Dim myResult As String
     myKvp1.RemoveFirst
@@ -1527,11 +1527,11 @@ Private Sub RemoveLast()
     
     'Act:
     Set myKvp1 = New TestKvpWrapperLongString
-    myKvp1.AddByKey key:=22&, Value:="Hello World 1"
-    myKvp1.AddByKey key:=23&, Value:="Hello World 2"
-    myKvp1.AddByKey key:=25&, Value:="Hello World 3"
-    myKvp1.AddByKey key:=26&, Value:="Hello World 4"
-    myKvp1.AddByKey key:=27&, Value:="Hello World 5"
+    myKvp1.AddByKey Key:=22&, Value:="Hello World 1"
+    myKvp1.AddByKey Key:=23&, Value:="Hello World 2"
+    myKvp1.AddByKey Key:=25&, Value:="Hello World 3"
+    myKvp1.AddByKey Key:=26&, Value:="Hello World 4"
+    myKvp1.AddByKey Key:=27&, Value:="Hello World 5"
     
     Dim myResult As String
     myKvp1.RemoveLast
@@ -1556,11 +1556,11 @@ Private Sub RemoveAny()
     
     'Act:
     Set myKvp1 = New TestKvpWrapperLongString
-    myKvp1.AddByKey key:=22&, Value:="Hello World 1"
-    myKvp1.AddByKey key:=23&, Value:="Hello World 2"
-    myKvp1.AddByKey key:=25&, Value:="Hello World 3"
-    myKvp1.AddByKey key:=26&, Value:="Hello World 4"
-    myKvp1.AddByKey key:=27&, Value:="Hello World 5"
+    myKvp1.AddByKey Key:=22&, Value:="Hello World 1"
+    myKvp1.AddByKey Key:=23&, Value:="Hello World 2"
+    myKvp1.AddByKey Key:=25&, Value:="Hello World 3"
+    myKvp1.AddByKey Key:=26&, Value:="Hello World 4"
+    myKvp1.AddByKey Key:=27&, Value:="Hello World 5"
     Debug.Print myKvp1.GetKeysAsString
     Dim myResult As String
     myKvp1.Remove 25&
@@ -1568,6 +1568,68 @@ Private Sub RemoveAny()
     
     'Assert:
     Assert.IsTrue myKvp1.LacksKey(25&)
+
+TestExit:
+    Exit Sub
+TestFail:
+    Assert.Fail "Test raised an error: #" & Err.Number & " - " & Err.Description
+End Sub
+
+
+'@TestMethod("Kvp")
+Private Sub SubSetByKey()
+    On Error GoTo TestFail
+    
+    'Arrange:
+    Dim myKvp1 As TestKvpWrapperLongString: Set myKvp1 = New TestKvpWrapperLongString
+    myKvp1.AddByKey Key:=22&, Value:="Hello World 1"
+    myKvp1.AddByKey Key:=23&, Value:="Hello World 2"
+    myKvp1.AddByKey Key:=25&, Value:="Hello World 3"
+    myKvp1.AddByKey Key:=26&, Value:="Hello World 4"
+    myKvp1.AddByKey Key:=27&, Value:="Hello World 5"
+    
+    Dim mySubSetKeys As Variant
+    mySubSetKeys = Array(22&, 25&, 26&)
+
+    Dim mySubSetKvp As Kvp
+    
+    'Act:
+    Set mySubSetKvp = myKvp1.SubSetByKeys(mySubSetKeys)
+    
+    'Assert:
+    Assert.SequenceEquals mySubSetKeys, mySubSetKvp.GetKeys
+
+TestExit:
+    Exit Sub
+TestFail:
+    Assert.Fail "Test raised an error: #" & Err.Number & " - " & Err.Description
+End Sub
+
+'@TestMethod("Kvp")
+Private Sub SubSetByKey_IgnoreKeys()
+    On Error GoTo TestFail
+    
+    'Arrange:
+    Dim myKvp1 As TestKvpWrapperLongString: Set myKvp1 = New TestKvpWrapperLongString
+    myKvp1.AddByKey Key:=22&, Value:="Hello World 1"
+    myKvp1.AddByKey Key:=23&, Value:="Hello World 2"
+    myKvp1.AddByKey Key:=25&, Value:="Hello World 3"
+    myKvp1.AddByKey Key:=26&, Value:="Hello World 4"
+    myKvp1.AddByKey Key:=27&, Value:="Hello World 5"
+    
+    Dim mySubSetKeys As Variant
+    mySubSetKeys = Array(22&, 24&, 25&, 26&, 80&)
+
+    Dim myResultKeys As Variant
+    myResultKeys = Array(22&, 25&, 26&)
+
+    Dim mySubSetKvp As Kvp
+    
+    'Act:
+    Set mySubSetKvp = myKvp1.SubSetByKeys(mySubSetKeys)
+    
+    'Assert:
+    Assert.SequenceEquals myResultKeys, mySubSetKvp.GetKeys
 
 TestExit:
     Exit Sub
