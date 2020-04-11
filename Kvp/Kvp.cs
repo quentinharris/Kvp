@@ -11,13 +11,198 @@ namespace VBALibrary
     [ClassInterface(ClassInterfaceType.AutoDual)]
     //[ComDefaultInterface(typeof(IKvp))]
     //[ComSourceInterfaces(typeof(IKvp))] obsolete
-    public partial class Kvp : IKvp, IEnumerable
+    public class Kvp : IKvp, IEnumerable
     {
+        private Dictionary<dynamic, dynamic> Host = new Dictionary<dynamic, dynamic>();
+
+        // Item[x]: Not used in VBA due to the Intellisense/IDespatch issue
+        private dynamic this[dynamic key]
+        {
+            get
+            {
+                return Host[key];
+            }
+            set
+            {
+                Host[key] = (dynamic)value;
+            }
+        }
+
+        // Allows a standard Kvp to be enumerated in VBA
+        public IEnumerator GetEnumerator()
+        {
+            foreach (KeyValuePair<dynamic, dynamic> myPair in Host)
+            {
+                yield return new KVPair(myPair.Key, myPair.Value);
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        private dynamic _FirstIndex;
+
+        private dynamic GetNextKvpKey()
+        {
+            //This is not an iterator function
+            if (Host.Count == 0)
+            {
+                if (_FirstIndex == null)
+                {
+                    _FirstIndex = 0;
+                    return _FirstIndex;
+                }
+                else
+                {
+                    return _FirstIndex;
+                }
+            }
+
+            var myKey = Host.Keys.Last();
+            if (IsNumericDataType(myKey))
+            {
+                return GetNextKvpKeyAsNumber(myKey);
+            }
+
+            if (myKey is string)
+            {
+                return GetNextKvpKeyAsString(myKey);
+            }
+
+            throw new InvalidOperationException("Kvp:Adding by Index: Key is not a key or number");
+        }
+
+        private dynamic GetNextKvpKeyAsNumber(dynamic ipKey)
+        {
+            while (Host.ContainsKey(ipKey))
+            {
+                ipKey++;
+            }
+            return ipKey;
+        }
+
+        private string GetNextKvpKeyAsString(string ipKey)
+        {
+            var myKey = ipKey;
+            while (Host.ContainsKey(myKey))
+            {
+                myKey = IncrementStr(myKey);
+            }
+            return myKey;
+        }
+
+        private bool IsNumericDataType(dynamic ipValue)
+        {
+            switch (Type.GetTypeCode(ipValue.GetType()))
+            {
+                case TypeCode.Byte:
+                case TypeCode.SByte:
+                case TypeCode.UInt16:
+                case TypeCode.UInt32:
+                case TypeCode.UInt64:
+                case TypeCode.Int16:
+                case TypeCode.Int32:
+                case TypeCode.Int64:
+                case TypeCode.Decimal:
+                case TypeCode.Double:
+                case TypeCode.Single:
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
+
+        // ToDo: The function below could be revised to allow a generic seial number
+        // to be updated.
+        // i.e. needs the ability to ignore certain characters used to
+        // denote fields.
+        private static string IncrementStr(string ipStr)
+        {
+            var myChars = ipStr.ToCharArray();
+
+            var myIndex = myChars.Length - 1;
+            var myInc = false;
+            while (myIndex >= 0)
+            {
+                var myChar = IncrementChar(myChars[myIndex]);
+                if (myChar < myChars[myIndex])
+                {
+                    myChars[myIndex] = myChar;
+                    myIndex--;
+                }
+                else
+                {
+                    myChars[myIndex] = myChar;
+                    myInc = true;
+                    break;
+                }
+            }
+            if (!myInc)
+            {
+                return "0" + new string(myChars);
+            }
+            else
+            {
+                return new string(myChars);
+            }
+        }
+
+        private const string KeyChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvxyz";
+
+        private static char IncrementChar(char ipChar)
+        {
+            do
+            {
+                if (ipChar == 'z')
+                {
+                    // Wrap around z to 0'
+                    ipChar = '0';
+                }
+                else
+                {
+                    ipChar++;
+                };
+            } while (!KeyChars.Contains(ipChar.ToString()));
+            return ipChar;
+        }
+
+        // for use by VBA to replace = Kvp.Item(x)
+        public dynamic GetItem(dynamic Key)
+        {
+            return Host[Key];
+        }
+
+        // for use by VBA to replace Kvp.Item(x)=
+        public void SetItem(dynamic Key, dynamic Value)
+        {
+            Host[Key] = Value;
+        }
+
         public void AddByIndex(dynamic Value)
         {
             Host.Add(GetNextKvpKey(), Value);
         }
 
+        public void SetFirstIndexAsLong(int Index = 0)
+        {
+            if (_FirstIndex != null)
+            {
+                throw new ArgumentNullException("Kvp:FirstIndex: The first index is already set as long {0}", _FirstIndex);
+            }
+            _FirstIndex = Index;
+        }
+
+        public void SetFirstIndexAsString(string Index = "a")
+        {
+            if (_FirstIndex != null)
+            {
+                throw new ArgumentNullException("Kvp:FirstIndex: The first index is already set as string {0}", _FirstIndex);
+            }
+            _FirstIndex = Index;
+        }
 
         public void AddByIndexAsBytes(string ipString)
         {
@@ -27,10 +212,9 @@ namespace VBALibrary
             }
             foreach (char myChar in ipString)
             {
-                Host.Add(GetNextKvpKey(), (byte) myChar);
+                Host.Add(GetNextKvpKey(), (byte)myChar);
             }
         }
-
 
         public void AddByIndexAsCharacters(string ipString)
         {
@@ -44,7 +228,6 @@ namespace VBALibrary
             }
         }
 
-
         public void AddByIndexFromArray(dynamic ipArray)
         {
             //dynamic[] myArray = (dynamic)ipArray;
@@ -53,7 +236,6 @@ namespace VBALibrary
                 Host.Add(GetNextKvpKey(), myItem);
             }
         }
-
 
         // An equivalent Method for Scripting.Dictionaries is not required because
         // we have the AddbyKeyFromArrays Method
@@ -69,13 +251,11 @@ namespace VBALibrary
             }
         }
 
-
         public void AddByKey(dynamic Key, dynamic Value)
         {
             Host.Add(Key, Value);
         }
 
-       
         public void AddByKeyFromArrays(dynamic KeyArray, dynamic ValueArray)
         {
             int KeysCount = ((dynamic[])KeyArray).GetUpperBound(0);
@@ -93,7 +273,6 @@ namespace VBALibrary
                 Host.Add(KeyArray[i], ValueArray[i]);
             }
         }
-
 
         public void AddByKeyFromTable(dynamic table, bool CopyKeys = false, bool byColumn = false)
         {
@@ -138,7 +317,6 @@ namespace VBALibrary
             }
         }
 
-
         public Kvp Clone()
         {
             Kvp CloneKvp = new Kvp();
@@ -148,7 +326,6 @@ namespace VBALibrary
             }
             return CloneKvp;
         }
-
 
         public Kvp Cohorts(dynamic ArgKvp)
         {
@@ -203,12 +380,10 @@ namespace VBALibrary
             return ResultKvp;
         }
 
-
         public int Count()
         {
             return Host.Count;
         }
-
 
         public dynamic GetFirst()
         {
@@ -216,12 +391,10 @@ namespace VBALibrary
             return new KVPair(myPair.Key, myPair.Value);
         }
 
-
         public dynamic GetKey(dynamic Value)
         {
             return Mirror()[1][Value];
         }
-
 
         public dynamic GetKeys
         {
@@ -231,7 +404,6 @@ namespace VBALibrary
             }
         }
 
-
         public dynamic GetKeysAscending()
         {
             dynamic myKeys = Host.Keys.ToArray();
@@ -239,24 +411,20 @@ namespace VBALibrary
             return myKeys;
         }
 
-
         public string GetKeysAsString(string Separator = ",")
         {
             return Host.Keys.ToSeparatedString(Separator);
         }
-
 
         public string GetKeysAsStringAscending(string Separator = ",")
         {
             return String.Join(Separator, GetKeysAscending());
         }
 
-
         public string GetKeysAsStringDescending(string Separator = ",")
         {
             return String.Join<dynamic>(Separator, GetKeysDescending());
         }
-
 
         public dynamic GetKeysDescending()
         {
@@ -266,13 +434,11 @@ namespace VBALibrary
             return myKeys;
         }
 
-
         public dynamic GetLast()
         {
             dynamic myPair = Host.Last();
             return new KVPair(myPair.Key, myPair.Value);
         }
-
 
         public dynamic GetValues
         {
@@ -282,36 +448,30 @@ namespace VBALibrary
             }
         }
 
-
         public string GetValuesAsString(string Separator = ",") //string ipSeparator = ",")
         {
             return Host.Values.ToSeparatedString(Separator);
         }
-
 
         public bool HoldsKey(dynamic Key)
         {
             return Host.ContainsKey(Key);
         }
 
-
         public bool HoldsValue(dynamic Value)
         {
             return Host.ContainsValue(Value);
         }
-
 
         public bool IsEmpty()
         {
             return Host.Count == 0;
         }
 
-
         public bool IsNotEmpty()
         {
             return !IsEmpty();
         }
-
 
         public dynamic KeyAt(int Index)
         {
@@ -323,7 +483,6 @@ namespace VBALibrary
             return myKeys[Index];
         }
 
-
         // Allows a wrapped Kvp to be enumerated in VBA
         public IEnumerator KvpEnum()
         {
@@ -333,18 +492,15 @@ namespace VBALibrary
             }
         }
 
-
         public bool LacksKey(dynamic Key)
         {
             return !HoldsKey(Key);
         }
 
-
         public bool LacksValue(dynamic Value)
         {
             return !HoldsValue(Value);
         }
-
 
         public Kvp Mirror()
         {
@@ -365,14 +521,12 @@ namespace VBALibrary
             return MyResult;
         }
 
-
         public dynamic Pull(dynamic ipKey)
         {
             dynamic myValue = Host[ipKey];
             Host.Remove(ipKey);
             return new KVPair(ipKey, myValue);
         }
-
 
         public dynamic PullFirst()
         {
@@ -381,7 +535,6 @@ namespace VBALibrary
             return new KVPair(myPair.Key, myPair.Value);  //.Key;//, myPair.Value); ; ;
         }
 
-
         public dynamic PullLast()
         {
             dynamic myPair = Host.Last();
@@ -389,24 +542,20 @@ namespace VBALibrary
             return new KVPair(myPair.Key, myPair.Value);
         }
 
-
         public void Remove(dynamic Key)
         {
             Host.Remove(Key);
         }
-
 
         public void RemoveAll()
         {
             Host.Clear();
         }
 
-
         public void RemoveFirst()
         {
             this.PullFirst();
         }
-
 
         public void RemoveLast()
         {
@@ -418,19 +567,18 @@ namespace VBALibrary
             Kvp MySubSet = new Kvp();
             foreach (dynamic myItem in KeyArray)
             {
-                if (Host.HoldsKey(myItem))
+                if (this.Host.ContainsKey(myItem))
                 {
                     MySubSet.AddByKey(myItem, Host[myItem]);
                 }
-             }
+            }
+            return MySubSet;
         }
-
 
         public bool ValuesAreNotUnique()
         {
             return !ValuesAreUnique();
         }
-
 
         public bool ValuesAreUnique()
         {

@@ -50,7 +50,7 @@ namespace VBALibrary
 
         void SetItem(dynamic Key, dynamic Value);
 
-        IEnumerator GetEnumerator();
+        //IEnumerator GetEnumerator();
 
         void SetFirstIndexAsLong(int Index = 0);
 
@@ -288,6 +288,7 @@ namespace VBALibrary
         void RemoveAll();
 
         dynamic SubSetByKeys(dynamic KeyArray);
+
         /// <summary>
         /// Returns true if the Values in Kvp are unique.
         /// </summary>

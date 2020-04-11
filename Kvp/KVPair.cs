@@ -6,7 +6,7 @@ namespace VBALibrary
 {
     [ComVisible(true)]
     // [ClassInterface(ClassInterfaceType.AutoDispatch)]
-    //[ComDefaultInterface(typeof(IKVPair))]
+    // [ComDefaultInterface(typeof(IKVPair))]
     public class KVPair : IKVPair
     {
         public object Key { get; set; }
@@ -17,17 +17,5 @@ namespace VBALibrary
             Key = ipKey;
             Value = ipValue;
         }
-
-        //public KVPair(KeyValuePair<dynamic, dynamic> ipPair)
-        //{
-        //    Key = ipPair.Key;
-        //    Value = ipPair.Value;
-        //}
-
-        //public KVPair(DictionaryEntry ipPair)
-        //{
-        //    Key = ipPair.Key;
-        //    Value = ipPair.Value;
-        //}
     }
 }
