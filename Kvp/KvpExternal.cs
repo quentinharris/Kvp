@@ -324,6 +324,16 @@ namespace VBALibrary
         }
 
 
+        // Allows a wrapped Kvp to be enumerated in VBA
+        public IEnumerator KvpEnum()
+        {
+            foreach (KeyValuePair<dynamic, dynamic> myPair in Host)
+            {
+                yield return new KVPair(myPair.Key, myPair.Value);
+            }
+        }
+
+
         public bool LacksKey(dynamic Key)
         {
             return !HoldsKey(Key);
