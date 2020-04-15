@@ -463,6 +463,16 @@ namespace VBALibrary
             return Host.ContainsValue(Value);
         }
 
+        public Kvp Invert()
+        {
+            Kvp InvertedKvp = new Kvp();
+            foreach (KeyValuePair<dynamic, dynamic> myPair in Host.Reverse())
+            {
+                InvertedKvp.AddByKey(myPair.Key, myPair.Value);
+            }
+            return InvertedKvp;
+        }
+
         public bool IsEmpty()
         {
             return Host.Count == 0;

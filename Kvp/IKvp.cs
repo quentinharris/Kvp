@@ -202,6 +202,8 @@ namespace VBALibrary
         /// <returns>Boolean</returns>
         bool HoldsValue(dynamic Value);
 
+        Kvp Invert();
+
         /// <summary>
         /// True if the Kvp holds 0 key/value pairs
         /// </summary>
