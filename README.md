@@ -1,7 +1,7 @@
 # Kvp
 
 A C# library that implements a flexible typeless Dictionary (Key Value Pairs) for use in VBA.
-The objective is remove some of the pain (particularly the ppopulating step) of using Collections and Scripting.Dictionaries in VBA.
+The objective is remove some of the pain (particularly the populating step) of using Collections and Scripting.Dictionaries in VBA.
 
 I'm not a professional programmer so please don't expect to see succint, beautiful, idiomatic C# code.  
 Much of what I've achieved is by virtue of much dablling with VBA, Cargo Cult programming for C#, and reading the Blog articles at RubberDuck.  
@@ -12,7 +12,7 @@ I'm keen to learn and do better, so suggestions, comments and contributions are 
 ## Using a Kvp
 
 1. Place the KvpClass library elements in a directory.  
-2. From the VBA IDE use Tools.References and then browse to the directory.  
+2. From the VBA IDE use Tools.References and then browse to the directory used above.  
 3. Select the KvpClass.tlb file
 4. Check the new entry in the References list (Kvp: A flexible Key/Value pair dictionary object for VBA)
 5. Click OK.  
