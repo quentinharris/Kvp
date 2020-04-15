@@ -36,7 +36,7 @@ namespace VBALibrary
     /// </summary>
     //[Guid("6DC1808F-81BA-4DE0-9F7C-42EA11621B7E")]
     [ComVisible(true)]
-    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
+    //[InterfaceType(ComInterfaceType.InterfaceIsDual)]
     public interface IKvp
     {
         ///// <summary>
@@ -50,7 +50,7 @@ namespace VBALibrary
 
         void SetItem(dynamic Key, dynamic Value);
 
-        //IEnumerator GetEnumerator();
+        IEnumerator GetEnumerator();
 
         void SetFirstIndexAsLong(int Index = 0);
 
@@ -271,6 +271,7 @@ namespace VBALibrary
         /// Removes the Key/Value pair spacified by "Key" from the Kvp
         /// </summary>
         //void Remove(dynamic Key);
+        void Remove(dynamic Key);
 
         /// <summary>
         /// deletes the element at th key of the lower bound of array MyKvp.keys
