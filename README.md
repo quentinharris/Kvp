@@ -4,7 +4,7 @@ A C# library that implements a flexible typeless Dictionary (Key Value Pairs) fo
 The objective is remove some of the pain (particularly the populating step) of using Collections and Scripting.Dictionaries in VBA.
 
 I'm not a professional programmer so please don't expect to see succint, beautiful, idiomatic C# code.  
-Much of what I've achieved is by virtue of much dablling with VBA, Cargo Cult programming for C#, and reading the Blog articles at RubberDuck.  
+Much of what I've achieved is by virtue of much dabbling with VBA to assist me in my day job as a technical reviewer/writer, Cargo Cult programming for C#, and reading the Blog articles at RubberDuck.  
 The code is provided as is with no pretentions to warranty or fitness for purpose.  Use at your own risk.  
 
 I'm keen to learn and do better, so suggestions, comments and contributions are most welcome.
