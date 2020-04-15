@@ -5,8 +5,6 @@ using System.Runtime.InteropServices;
 namespace VBALibrary
 {
     [ComVisible(true)]
-    // [ClassInterface(ClassInterfaceType.AutoDispatch)]
-    // [ComDefaultInterface(typeof(IKVPair))]
     public class KVPair : IKVPair
     {
         public object Key { get; set; }

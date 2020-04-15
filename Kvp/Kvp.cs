@@ -8,8 +8,8 @@ namespace VBALibrary
 {
     //[Guid("434C844C-9FA2-4EC6-AB75-45D3013D75BE")]
     [ComVisible(true)]
-    [ClassInterface(ClassInterfaceType.AutoDual)]
-    //[ComDefaultInterface(typeof(IKvp))]
+    [ClassInterface(ClassInterfaceType.None)]
+    [ComDefaultInterface(typeof(IKvp))]
     //[ComSourceInterfaces(typeof(IKvp))] obsolete
     public class Kvp : IKvp, IEnumerable
     {
